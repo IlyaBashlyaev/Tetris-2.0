@@ -260,15 +260,6 @@
     z-index: 3;
 }
 
-::-webkit-scrollbar {
-    background-color: #181818;
-    width: 1vw;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #555, #333)
-}
-
 header {
     position: fixed;
     width: 100vw;
@@ -315,13 +306,22 @@ section {
     background-color: #181818;
 }
 
+section::-webkit-scrollbar {
+    background-color: #181818;
+    width: .8vw;
+}
+
+section::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #555, #333);
+    border-radius: .4vw;
+}
+
 .pages {
     width: 100%;
     height: 7vh;
     display: flex;
     fill: #909090;
     color: #eee;
-    font-family: 'Roboto', Arial;
 }
 
 .pages.clicked {

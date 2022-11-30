@@ -1,3 +1,11 @@
+if (window.cordova) {
+    document.body.style.fontFamily = 'Montserrat'
+    document.body.style.fontWeight = '500'
+}
+
+else
+    document.body.style.fontFamily = 'Itim'
+
 var firstClick = false
 var musicIndex = Math.round(Math.random() * 4)
 var musicPlay
