@@ -632,12 +632,10 @@ function moveSwipe(event) {
     if (!pause && !isFalling) {
         var touch = event.touches[0].clientX
         touch = touch - (window.innerWidth / 2 - canv.width / 2)
-        move = Math.round(touch / (canv.width / arenaWidth))
+        move = Math.round(touch / (canv.width / arenaWidth)) - 1
 
-        if (collide(arena, player)) {
+        if (collide(arena, player))
             move = player.pos.x
-        }
-
         playerMove(move - player.pos.x)
     }
 }

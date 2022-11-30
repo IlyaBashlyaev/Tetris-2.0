@@ -34,7 +34,6 @@
 }
 
 .tetris {
-    margin: 0 4px;
     border: 1vh solid #333;
     background-color: #000;
     box-shadow: 0 0 2vh rgba(0, 0, 0, .5);
