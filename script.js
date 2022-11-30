@@ -163,7 +163,7 @@ function settings() {
 
 function arenaSweep(rowCount) {
     outer: for (let y = arenaHeight - 1; y > 0; y--) {
-        for (let x = 1; x < arena[arenaHeight - 1].length; x++) {
+        for (let x = 0; x < arena[arenaHeight - 1].length; x++) {
             if (arena[y][x] == 0) {
                 continue outer
             }
