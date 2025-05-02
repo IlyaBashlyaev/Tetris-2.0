@@ -178,7 +178,7 @@ function arenaSweep(rowCount) {
             [arena[row], arena[row - 1]] = [arena[row - 1], arena[row]]
         }
 
-        player.score += rowCount
+        player.score++
         rowCount *= 2
         arenaSweep(rowCount)
     }
@@ -190,9 +190,9 @@ function collide(arena, player) {
         for (let x = 0; x < m[y].length; ++x) {
             if (m[y][x] != 0 &&
                 (arena[y + p.y] &&
-                arena[y + p.y][x + p.x]) != 0) {
-                    return true
-                }
+                    arena[y + p.y][x + p.x]) != 0) {
+                return true
+            }
         }
     }
     return false
@@ -210,65 +210,65 @@ function createMatrix(w, h) {
 function createPiece(type) {
     if (type == 'T') {
         return  [
-                    [0, 0, 0, 0],
-                    [1, 1, 1, 0],
-                    [0, 1, 0, 0],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [1, 1, 1, 0],
+            [0, 1, 0, 0],
+            [0, 0, 0, 0]
+        ]
     }
 
     else if (type == 'O') {
         return  [
-                    [0, 0, 0, 0],
-                    [0, 2, 2, 0],
-                    [0, 2, 2, 0],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [0, 2, 2, 0],
+            [0, 2, 2, 0],
+            [0, 0, 0, 0]
+        ]
     }
 
     else if (type == 'L') {
         return  [
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 3],
-                    [0, 3, 3, 3],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [0, 0, 0, 3],
+            [0, 3, 3, 3],
+            [0, 0, 0, 0]
+        ]
     }
 
     else if (type == 'J') {
         return  [
-                    [0, 0, 0, 0],
-                    [4, 0, 0, 0],
-                    [4, 4, 4, 0],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [4, 0, 0, 0],
+            [4, 4, 4, 0],
+            [0, 0, 0, 0]
+        ]
     }
 
     else if (type == 'I') {
         return  [
-                    [0, 0, 0, 0],
-                    [5, 5, 5, 5],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [5, 5, 5, 5],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
     }
 
     else if (type == 'S') {
         return  [
-                    [0, 0, 0, 0],
-                    [0, 6, 6, 0],
-                    [6, 6, 0, 0],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [0, 6, 6, 0],
+            [6, 6, 0, 0],
+            [0, 0, 0, 0]
+        ]
     }
 
     else if (type == 'Z') {
         return  [
-                    [0, 0, 0, 0],
-                    [7, 7, 0, 0],
-                    [0, 7, 7, 0],
-                    [0, 0, 0, 0]
-                ]
+            [0, 0, 0, 0],
+            [7, 7, 0, 0],
+            [0, 7, 7, 0],
+            [0, 0, 0, 0]
+        ]
     }
 }
 
@@ -353,7 +353,7 @@ function playerDrop(quantity, isDropping = true) {
                 return
             }
             merge(arena, player)
-            
+
             playerReset()
             arenaSweep(1)
             break
@@ -402,7 +402,7 @@ function playerReset(maxScore = false) {
     nextPiece = createPiece(pieces[Math.round(6 * Math.random())])
     var
         value = 0
-        cell = 0
+    cell = 0
     var cubes = document.querySelector('.cubes')
     for (var row = 0; row < 4; row++) {
         for (var Cell = 0; Cell < 4; Cell++) {
@@ -437,7 +437,7 @@ function playerReset(maxScore = false) {
 
     player.pos.y = 0
     player.pos.x = (arena[0].length / 2 | 0) -
-                    (player.matrix[0].length / 2 | 0)
+        (player.matrix[0].length / 2 | 0)
 
     if (collide(arena, player) || maxScore) {
         arena.forEach(row => row.fill(0))
@@ -497,12 +497,9 @@ let lastTime = 0
 let dropInterval
 
 function update(time = 0) {
-    dropInterval = 400 - player.score
-    if (player.score >= 300) {
-        dropInterval = 100
-    }
-    if (player.score >= 1000) {
-        playerReset(true)
+    dropInterval = 400 - player.score / 2
+    if (player.score >= 400) {
+        dropInterval = 200
     }
 
     updateScore()
@@ -735,24 +732,24 @@ document.addEventListener('mousedown', function(e) {
     if (!pause && !isFalling) {
         if (
             window.innerHeight * 0.01 + player.pos.y * (canv.height / arenaHeight)
-                <= e.clientY &&
-                
+            <= e.clientY &&
+
             e.clientY
-                <= window.innerHeight * 0.01 + player.pos.y * (canv.height / arenaHeight) + canv.height / arenaHeight * 4 &&
-            
+            <= window.innerHeight * 0.01 + player.pos.y * (canv.height / arenaHeight) + canv.height / arenaHeight * 4 &&
+
 
             (window.innerWidth / 2 - canv.width / 2) + window.innerHeight * 0.01 + player.pos.x * (canv.width / arenaWidth)
-                <= e.clientX &&
-                
+            <= e.clientX &&
+
             e.clientX
-                <= (window.innerWidth / 2 - canv.width / 2) + window.innerHeight * 0.01 + player.pos.x * (canv.width / arenaWidth) + canv.width / arenaWidth * 4
+            <= (window.innerWidth / 2 - canv.width / 2) + window.innerHeight * 0.01 + player.pos.x * (canv.width / arenaWidth) + canv.width / arenaWidth * 4
         ) {
             playerRotate(1)
         }
 
         else if (
             window.innerHeight * 0.01 + player.pos.y * (canv.height / arenaHeight) + canv.height / arenaHeight * 8
-                <= e.clientY
+            <= e.clientY
         ) {
             clearInterval(fall)
             fall = setInterval(falling, 50)
